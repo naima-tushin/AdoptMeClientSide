@@ -1,0 +1,17 @@
+[
+    {
+      "id": 1,
+      "name": "John Doe",
+      "feedback": "Adopting through this website was a wonderful experience. We found our perfect furry friend and the process was smooth and easy!",
+      "image": "https://i.ibb.co/w7Cx3DF/testimonials-Img1.jpg",
+      "rating": 5
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "feedback": "This platform made it so easy to find and adopt a pet. We are so happy with our new family member!",
+      "image": "https://i.ibb.co/48QLtpP/testimonials-Img2.jpg",
+      "rating": 4
+    }
+  ]
+  
