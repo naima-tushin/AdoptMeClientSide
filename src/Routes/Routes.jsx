@@ -1,5 +1,6 @@
 import Main from "@/Layout/Main";
 import Home from "@/Pages/Home/Home";
+import PetListing from "@/Pages/PetListing/PetListing";
 import {
     createBrowserRouter,
   } from "react-router-dom";
@@ -12,7 +13,11 @@ import {
         {
             path: '/',
             element: <Home></Home>
-        }
+        },
+        {
+          path: 'PetListing',
+          element: <PetListing></PetListing>
+      }
       ]
     },
   ]);

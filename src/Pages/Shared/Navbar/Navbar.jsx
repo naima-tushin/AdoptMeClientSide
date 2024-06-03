@@ -3,6 +3,7 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { HoverCard, HoverCardTrigger, HoverCardContent } from "@/components/ui/hover-card";
 import logo from '../../../assets/images/logo.png';
 import profilePic from '../../../assets/images/profilePic.jpg';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     return (
@@ -12,8 +13,8 @@ const Navbar = () => {
                     <img src={logo} alt="Website Logo" className="h-20" />
                 </div>
                 <ul className="flex space-x-6 text-white">
-                    <li><a href="#" className="hover:bg-gray-700 px-3 py-2 rounded">Home</a></li>
-                    <li><a href="#" className="hover:bg-gray-700 px-3 py-2 rounded">Pet Listing</a></li>
+                    <li><Link to="/">Home</Link></li>
+                    <li><Link to="/PetListing">Pet Listing</Link></li>
                     <li><a href="#" className="hover:bg-gray-700 px-3 py-2 rounded">Donation Campaigns</a></li>
                     <li><a href="#" className="hover:bg-gray-700 px-3 py-2 rounded">Login/Register</a></li>
                 </ul>
