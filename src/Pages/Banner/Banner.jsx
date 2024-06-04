@@ -47,7 +47,7 @@ const Banner = () => {
       autoPlay={false}
     >
       {banners.map((banner, index) => (
-        <div key={index} className="relative h-[650px]">
+        <div key={index} className="relative h-[650px]" style={{ paddingTop: '80px' }}>
           <img src={banner.src} className="w-full h-full object-cover" alt={`Banner ${index + 1}`} />
           <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-40">
             <div className="text-center text-white p-8 bg-black bg-opacity-20 rounded-lg">

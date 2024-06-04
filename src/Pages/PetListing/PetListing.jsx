@@ -1,5 +1,5 @@
-import { Helmet } from 'react-helmet-async';
 import React, { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import PetListingCard from '../PetListingCard/PetListingCard';
 import BannerImage1 from '../../assets/images/petListingBannerImg.jpg';
 
@@ -11,14 +11,21 @@ const PetListing = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
+        // Fetch the pet data from the JSON file
+        fetch('/pets.json')
+            .then(response => response.json())
+            .then(data => setPets(data));
+    }, []);
+
+    useEffect(() => {
         // Fetch pets data from API or local storage
         // For now, let's assume petsData is fetched from somewhere
         const petsData = [
-                { id: 1, name: 'Buddy', age: 2, location: 'New York', category: 'Dog', image: 'https://i.ibb.co/P468Ghq/dog.jpg' },
-                { id: 2, name: 'Max', age: 3, location: 'Chicago', category: 'Dog', image: 'https://i.ibb.co/94C3b1B/cats.jpg' },
-                { id: 3, name: 'Whiskers', age: 4, location: 'Los Angeles', category: 'Cat', image: 'https://i.ibb.co/VCdZ9qp/birds.webp' },
-                { id: 4, name: 'Fluffy', age: 1, location: 'Houston', category: 'Cat', image: 'https://i.ibb.co/WvqwpWD/tiger.jpg' },
-                { id: 5, name: 'Rocky', age: 5, location: 'Miami', category: 'Dog', image: 'https://i.ibb.co/YhDTCh7/rabbits.jpg' }
+            { _id: "1", name: 'Buddy', age: '2 years', location: 'New York, NY', category: 'Dog', image: 'https://i.ibb.co/P468Ghq/dog.jpg' },
+            { _id: "2", name: 'Mittens', age: '3 years', location: 'Los Angeles, CA', category: 'Cat', image: 'https://i.ibb.co/94C3b1B/cats.jpg' },
+            { _id: "3", name: 'Tiger', age: '3 years', location: 'Los Angeles, CA', category: 'Cat', image: 'https://i.ibb.co/WvqwpWD/tiger.jpg' },
+            { _id: "4", name: 'Birds', age: '3 years', location: 'Los Angeles, CA', category: 'Cat', image: 'https://i.ibb.co/VCdZ9qp/birds.webp' },
+            { _id: "5", name: 'Rabbits', age: '3 years', location: 'Los Angeles, CA', category: 'Cat', image: 'https://i.ibb.co/YhDTCh7/rabbits.jpg' },
         ];
         setPets(petsData);
         setFilteredPets(petsData);
@@ -45,13 +52,13 @@ const PetListing = () => {
     };
 
     return (
-        <div className="App">
+        <div className="App" style={{ paddingTop: '80px' }}>
             <Helmet>
                 <title>Adopt Me | Pet Listing</title>
             </Helmet>
             <div className="relative w-full">
                 {/* Banner Image */}
-                <img src={BannerImage1} alt="Banner 1" className="w-full h-[650px] object-cover" />
+                <img src={BannerImage1} alt="Banner 1" className="w-full h-[570px] object-cover" />
                 {/* Title and Description overlaid */}
                 <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-40">
                     <div className="text-center text-white p-8 bg-white bg-opacity-20 rounded-lg">
@@ -86,7 +93,7 @@ const PetListing = () => {
                 </div>
                 <div className="grid grid-cols-3 gap-4">
                     {filteredPets.map(pet => (
-                        <PetListingCard key={pet.id} pet={pet} />
+                        <PetListingCard key={pet._id} pet={pet} />
                     ))}
                 </div>
                 {isLoading && <p>Loading...</p>}

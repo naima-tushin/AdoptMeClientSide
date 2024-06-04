@@ -1,5 +1,6 @@
 import Main from "@/Layout/Main";
 import Home from "@/Pages/Home/Home";
+import PetDetails from "@/Pages/PetDetails/PetDetails";
 import PetListing from "@/Pages/PetListing/PetListing";
 import {
     createBrowserRouter,
@@ -17,7 +18,11 @@ import {
         {
           path: 'PetListing',
           element: <PetListing></PetListing>
-      }
+      },
+      {
+        path: '/PetDetails/:id',
+        element: <PetDetails></PetDetails>
+      }, 
       ]
     },
   ]);
