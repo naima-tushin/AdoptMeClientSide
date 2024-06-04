@@ -13,9 +13,9 @@ const Navbar = () => {
                     <img src={logo} alt="Website Logo" className="h-20" />
                 </div>
                 <ul className="flex space-x-6 text-white">
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/PetListing">Pet Listing</Link></li>
-                    <li><a href="#" className="hover:bg-gray-700 px-3 py-2 rounded">Donation Campaigns</a></li>
+                    <li><Link to="/" className="hover:bg-gray-700 px-3 py-2 rounded">Home</Link></li>
+                    <li><Link to="/PetListing" className="hover:bg-gray-700 px-3 py-2 rounded">Pet Listing</Link></li>
+                    <li><Link to="/DonationCampaigns" className="hover:bg-gray-700 px-3 py-2 rounded">Donation Campaigns</Link></li>
                     <li><a href="#" className="hover:bg-gray-700 px-3 py-2 rounded">Login/Register</a></li>
                 </ul>
                 <div className="relative">
