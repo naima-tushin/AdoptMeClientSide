@@ -16,7 +16,7 @@ const Navbar = () => {
                     <li><Link to="/" className="hover:bg-gray-700 px-3 py-2 rounded">Home</Link></li>
                     <li><Link to="/PetListing" className="hover:bg-gray-700 px-3 py-2 rounded">Pet Listing</Link></li>
                     <li><Link to="/DonationCampaigns" className="hover:bg-gray-700 px-3 py-2 rounded">Donation Campaigns</Link></li>
-                    <li><a href="#" className="hover:bg-gray-700 px-3 py-2 rounded">Login/Register</a></li>
+                    <li><Link to="/Login" className="hover:bg-gray-700 px-3 py-2 rounded">Login/Register</Link></li>
                 </ul>
                 <div className="relative">
                     <HoverCard>
@@ -27,7 +27,7 @@ const Navbar = () => {
                             </Avatar>
                         </HoverCardTrigger>
                         <HoverCardContent className="w-48 bg-white rounded-md shadow-lg py-2">
-                            <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Dashboard</a>
+                            <Link to="/Dashboard" href="#" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Dashboard</Link>
                             <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Logout</a>
                         </HoverCardContent>
                     </HoverCard>
