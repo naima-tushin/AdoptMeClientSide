@@ -18,7 +18,7 @@ const PetListing = () => {
                 { id: 2, name: 'Max', age: 3, location: 'Chicago', category: 'Dog', image: 'https://i.ibb.co/94C3b1B/cats.jpg' },
                 { id: 3, name: 'Whiskers', age: 4, location: 'Los Angeles', category: 'Cat', image: 'https://i.ibb.co/VCdZ9qp/birds.webp' },
                 { id: 4, name: 'Fluffy', age: 1, location: 'Houston', category: 'Cat', image: 'https://i.ibb.co/WvqwpWD/tiger.jpg' },
-                { id: 5, name: 'Rocky', age: 5, location: 'Miami', category: 'Dog', image: 'https://i.ibb.co/YhDTCh7/rabbits.jpg' },
+                { id: 5, name: 'Rocky', age: 5, location: 'Miami', category: 'Dog', image: 'https://i.ibb.co/YhDTCh7/rabbits.jpg' }
         ];
         setPets(petsData);
         setFilteredPets(petsData);
@@ -54,7 +54,7 @@ const PetListing = () => {
                 <img src={BannerImage1} alt="Banner 1" className="w-full h-[650px] object-cover" />
                 {/* Title and Description overlaid */}
                 <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-40">
-                    <div className="text-center text-white p-8 bg-black bg-opacity-60 rounded-lg">
+                    <div className="text-center text-white p-8 bg-white bg-opacity-20 rounded-lg">
                         <h2 className="text-4xl font-bold mb-4">Available Pets</h2>
                         <p className="text-lg md:text-xl mb-4">Explore our selection of adorable pets waiting for loving homes. From playful pups to cuddly kittens, find your perfect companion today!</p>
                         <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded">
