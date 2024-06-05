@@ -12,7 +12,7 @@ const PetListing = () => {
 
     useEffect(() => {
         // Fetch the pet data from the JSON file
-        fetch('/petDetails.json')
+        fetch('http://localhost:5000/PetListingDetails')
             .then(response => response.json())
             .then(data => setPets(data));
     }, []);

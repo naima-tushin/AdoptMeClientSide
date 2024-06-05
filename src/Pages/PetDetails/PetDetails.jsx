@@ -14,7 +14,7 @@ const PetDetails = ({ user }) => {
 
     useEffect(() => {
         // Fetch pet details from the JSON file
-        fetch('/petDetails.json')
+        fetch('http://localhost:5000/PetListingDetails')
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`Network response was not ok: ${response.statusText}`);

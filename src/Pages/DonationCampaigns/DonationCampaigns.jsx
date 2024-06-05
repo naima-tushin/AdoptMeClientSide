@@ -13,7 +13,7 @@ const DonationCampaigns = () => {
 
     const fetchData = () => {
         setIsLoading(true);
-        fetch('/donationCampaigns.json')
+        fetch('http://localhost:5000/DonationCampaignsDetails')
             .then(response => response.json())
             .then(data => {
                 // Sort campaigns by date in descending order
