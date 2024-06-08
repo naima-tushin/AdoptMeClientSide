@@ -8,7 +8,7 @@ import { AuthProvider } from "./context/AuthProvider";
 import 'tailwindcss/tailwind.css';
 import Register from './Pages/Register/Register';
 import Login from './Pages/Login/Login';
-import Dashboard from './Pages/Dashboard/Dashboard';
+import Dashboard from './Layout/Dashboard';
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {

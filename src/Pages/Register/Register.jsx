@@ -1,180 +1,132 @@
-import React, { useState } from "react";
-import { auth, googleProvider, githubProvider } from "../../firebase/firebase.config";
-import { signInWithEmailAndPassword, signInWithPopup, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { doc, setDoc } from "firebase/firestore";
-import { Link } from "react-router-dom";
-import { Helmet } from 'react-helmet-async';
+// import { Link, useNavigate } from "react-router-dom";
+// import { useForm } from "react-hook-form";
+// import SocialLogin from "../SocialLogin/SocialLogin";
+// import useAuth from "../../Hooks/useAuth";
+// import { FaEnvelope, FaEye, FaEyeSlash, FaLink, FaLock, FaUser } from "react-icons/fa";
+// import { useState } from "react";
+// import { Helmet } from "react-helmet-async";
+// import { ToastContainer, toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
+// // import backgroundImg from '../../assets/images/bg_login_signup.jpg';
+// import logo from '../../assets/images/logo.png';
 
-const Login = () => {
-    const [activeTab, setActiveTab] = useState("login");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [fullName, setFullName] = useState("");
-    const [profileImage, setProfileImage] = useState(null);
-    const [error, setError] = useState("");
+// const Register = () => {
+//     const { createUser, updateUserProfile, user } = useAuth();
+//     const [registerError, setRegisterError] = useState('');
+//     const [success, setSuccess] = useState('');
+//     const [showPass, setShowPass] = useState(false);
 
-    const handleLogin = async (e) => {
-        e.preventDefault();
-        try {
-            await signInWithEmailAndPassword(auth, email, password);
-            // Redirect to dashboard or other page
-        } catch (error) {
-            setError(error.message);
-        }
-    };
+//     const {
+//         register,
+//         handleSubmit,
+//         formState: { errors },
+//     } = useForm();
 
-    const handleSocialLogin = async (provider) => {
-        try {
-            await signInWithPopup(auth, provider);
-            // Redirect to dashboard or other page
-        } catch (error) {
-            setError(error.message);
-        }
-    };
+//     const navigate = useNavigate();
+//     const from = '/';
 
-    const handleRegister = async (e) => {
-        e.preventDefault();
-        try {
-            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            const user = userCredential.user;
+//     const onSubmit = (data) => {
+//         const { email, password, fullname, imageURL } = data;
 
-            if (profileImage) {
-                const storageRef = ref(storage, `profileImages/${user.uid}`);
-                await uploadBytes(storageRef, profileImage);
-                const imageUrl = await getDownloadURL(storageRef);
+//         setRegisterError('');
+//         setSuccess('');
 
-                await updateProfile(user, {
-                    displayName: fullName,
-                    photoURL: imageUrl,
-                });
-            } else {
-                await updateProfile(user, {
-                    displayName: fullName,
-                });
-            }
+//         if (password.length < 6 || !/[A-Z]/.test(password) || !/[a-z]/.test(password)) {
+//             setRegisterError('Password should be at least 6 characters and contain at least one uppercase letter and one lowercase letter');
+//             return;
+//         }
 
-            await setDoc(doc(db, "users", user.uid), {
-                name: fullName,
-                email: email,
-                role: "user",
-            });
+//         createUser(email, password)
+//             .then(() => {
+//                 updateUserProfile(fullname, imageURL)
+//                     .then(() => {
+//                         toast.success("Signed Up Successfully!");
+//                         setTimeout(() => {
+//                             navigate(from);
+//                         }, 1000);
+//                     });
+//             })
+//             .catch((error) => {
+//                 console.error(error);
+//                 setRegisterError('Email already exists');
+//             });
+//     };
 
-            // Redirect to dashboard or other page
-        } catch (error) {
-            setError(error.message);
-        }
-    };
+//     return (
+//         <div className="font-roboto min-h-screen flex justify-center items-center" >
+//             {/* style={{ backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.3)), url(${backgroundImg})`, backgroundSize: 'cover', backgroundPosition: 'center' }} */}
+//             <Helmet>
+//                 <title>Harvest Hub | Sign Up</title>
+//             </Helmet>
+//             <div className="lg:w-[40%] my-10">
+//                 <form onSubmit={handleSubmit(onSubmit)} className="bg-secondary shadow-md rounded px-4 lg:px-8 pt-6 pb-8 mb-4">
+//                 <div className="flex justify-center mb-2">
+//                         <img className="w-1/5" src={logo} alt="" />
+//                     </div>
+//                     <h1 className="text-2xl mb-6 text-center font-bold">Sign Up</h1>
+//                     {registerError && <p className="text-red-500 mb-4 text-center">{registerError}</p>}
+//                     {success && <p className="text-green-500 mb-4 text-center">{success}</p>}
+//                     <div className="lg:flex md:flex justify-between">
+//                     <div>
+//                     <div className="mb-4">
+//                         <label className="block text-black text-sm font-bold mb-2" htmlFor="fullname">
+//                             Full Name
+//                         </label>
+//                         <div className="relative">
+//                             <input type="text" placeholder="Enter Your Full Name" {...register("fullname", { required: true })} className="input input-bordered pl-10 w-full" />
+//                             <FaUser className="absolute top-1/2 left-3 transform -translate-y-1/2 h-6 text-primary"></FaUser>
+//                         </div>
+//                         {errors.fullname && <span className="text-red-500">This field is required</span>}
+//                     </div>
+//                     <div className="mb-4">
+//                         <label className="block text-black text-sm font-bold mb-2" htmlFor="email">
+//                             Email Address
+//                         </label>
+//                         <div className="relative">
+//                             <input type="email" placeholder="Enter Your Email" {...register("email", { required: true })} className="input input-bordered pl-10 w-full" />
+//                             <FaEnvelope className="absolute top-1/2 left-3 transform -translate-y-1/2 h-6 text-primary"></FaEnvelope>
+//                         </div>
+//                         {errors.email && <span className="text-red-500">This field is required</span>}
+//                     </div>
+//                     </div>
+//                     <div>
+//                     <div className="mb-4">
+//                         <label className="block text-black text-sm font-bold mb-2" htmlFor="imageURL">
+//                             Photo URL
+//                         </label>
+//                         <div className="relative">
+//                             <input type="text" placeholder="Enter Photo URL" {...register("imageURL", { required: true })} className="input input-bordered pl-10 w-full" />
+//                             <FaLink className="absolute top-1/2 left-3 transform -translate-y-1/2 h-6 text-primary"></FaLink>
+//                         </div>
+//                         {errors.imageURL && <span className="text-red-500">This field is required</span>}
+//                     </div>
+//                     <div className="mb-4">
+//                         <label className="block text-black text-sm font-bold mb-2" htmlFor="password">
+//                             Password
+//                         </label>
+//                         <div className="relative">
+//                             <input type={showPass ? "text" : "password"} placeholder="Enter Your Password" {...register("password", { required: true })} className="input input-bordered pl-10 w-full" />
+//                             <span onClick={() => setShowPass(!showPass)} className="absolute top-7 right-3 transform -translate-y-1/2 h-6 text-xl text-primary">
+//                                 {showPass ? <FaEyeSlash></FaEyeSlash> : <FaEye></FaEye>}
+//                             </span>
+//                             <FaLock className="absolute top-1/2 left-3 transform -translate-y-1/2 h-6 text-primary"></FaLock>
+//                         </div>
+//                         {errors.password && <span className="text-red-500">This field is required</span>}
+//                     </div>
+//                     </div>
+//                     </div>
+//                     <div className="mb-6">
+//                         <button className="btn w-full bg-black hover:bg-primary hover:text-black text-accent border-4 border-primary hover:border-black text-base">Sign Up</button>
+//                     </div>
+//                     <div className="text-center">
+//                         <p className="text-sm text-white">Already have an account? <Link to="/login" className="font-bold text-black">Please Login</Link></p>
+//                     </div>
+//                 </form>
+//                 <SocialLogin />
+//             </div>
+//             <ToastContainer />
+//         </div>
+//     );
+// };
 
-    return (
-        <div className="max-w-md mx-auto p-4" style={{ paddingTop: '100px' }}>
-            <Helmet>
-                <title>Adopt Me | Login/Register</title>
-            </Helmet>
-            <div className="flex justify-center mb-4">
-                <button className={`mr-2 ${activeTab === "login" ? "bg-blue-500" : "bg-gray-300"} text-white px-4 py-2 rounded-l`} onClick={() => setActiveTab("login")}>Login</button>
-                <button className={`ml-2 ${activeTab === "register" ? "bg-blue-500" : "bg-gray-300"} text-white px-4 py-2 rounded-r`} onClick={() => setActiveTab("register")}>Register</button>
-            </div>
-            {activeTab === "login" ? (
-                <form onSubmit={handleLogin}>
-                    <div className="mb-4">
-                        <label className="block mb-1">Email</label>
-                        <input
-                            type="email"
-                            className="w-full p-2 border border-gray-300 rounded"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <label className="block mb-1">Password</label>
-                        <input
-                            type="password"
-                            className="w-full p-2 border border-gray-300 rounded"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
-                    </div>
-                    {error && <p className="text-red-500">{error}</p>}
-                    <button type="submit" className="w-full p-2 bg-blue-500 text-white rounded">
-                        Login
-                    </button>
-                </form>
-            ) : (
-                <form onSubmit={handleRegister}>
-                    <div className="mb-4">
-                        <label className="block mb-1">Full Name</label>
-                        <input
-                            type="text"
-                            className="w-full p-2 border border-gray-300 rounded"
-                            value={fullName}
-                            onChange={(e) => setFullName(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <label className="block mb-1">Email</label>
-                        <input
-                            type="email"
-                            className="w-full p-2 border border-gray-300 rounded"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <label className="block mb-1">Password</label>
-                        <input
-                            type="password"
-                            className="w-full p-2 border border-gray-300 rounded"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <label className="block mb-1">Profile Image</label>
-                        <input
-                            type="file"
-                            className="w-full p-2"
-                            onChange={(e) => setProfileImage(e.target.files[0])}
-                        />
-                    </div>
-                    {error && <p className="text-red-500">{error}</p>}
-                    <button type="submit" className="w-full p-2 bg-blue-500 text-white rounded">
-                        Register
-                    </button>
-                </form>
-            )}
-            <div className="mt-4">
-                <button
-                    className="w-full p-2 mb-2 bg-red-500 text-white rounded"
-                    onClick={() => handleSocialLogin(googleProvider)}
-                >
-                    Login with Google
-                </button>
-                <button
-                    className="w-full p-2 bg-gray-800 text-white rounded"
-                    onClick={() => handleSocialLogin(githubProvider)}
-                >
-                    Login with GitHub
-                </button>
-            </div>
-            <div className="text-center mt-4">
-                {activeTab === "login" ? (
-                    <p>
-                        Don't have an account? <Link to="/register" className="text-blue-500">Register here</Link>
-                    </p>
-                ) : (
-                    <p>
-                        Already have an account? <Link to="/login" className="text-blue-500">Login here</Link>
-                    </p>
-                )}
-            </div>
-        </div>
-    );
-};
-
-export default Login;
+// export default Register;

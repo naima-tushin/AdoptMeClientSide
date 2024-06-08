@@ -1,15 +1,32 @@
-import React, { useContext } from "react";
-import { Navigate } from "react-router-dom";
-import { AuthContext } from "../context/AuthProvider";
+import { Navigate, useLocation } from "react-router-dom";
+import useAuth from "../../Hooks/useAuth";
+import { useEffect, useState } from "react";
+import { PacmanLoader } from "react-spinners";
 
 const ProtectedRoute = ({ children }) => {
-  const { currentUser } = useContext(AuthContext);
+    const { user, loading } = useAuth();
+    const location = useLocation();
+    const [spinLoading, setSpinLoading] = useState(true);
 
-  if (!currentUser) {
-    return <Navigate to="/login" />;
-  }
+    useEffect(() => {
+        if (!loading) {
+            setSpinLoading(false);
+        }
+    }, [loading]);
 
-  return children;
+    if (spinLoading) {
+        return <PacmanLoader color="#3d251e" size={20} />;
+    }
+
+    if (!user) {
+        return <Navigate to='/login' state={location?.pathname || '/'} />;
+    }
+
+    return (
+        <div>
+            {children}
+        </div>
+    );
 };
 
 export default ProtectedRoute;
