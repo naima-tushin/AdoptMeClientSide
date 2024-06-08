@@ -2,12 +2,14 @@ import { createContext, useEffect, useState } from "react";
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, GithubAuthProvider, signOut, updateProfile } from "firebase/auth";
 import auth from "../firebase/firebase.config";
 import axios from "axios";
+import useAxiosPublic from "@/Hooks/useAxiosPublic";
 
 
 export const AuthContext = createContext(null)
 
 const googleProvider = new GoogleAuthProvider();
 const githubProvider = new GithubAuthProvider();
+const axiosPublic = useAxiosPublic();
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
@@ -63,21 +65,26 @@ const AuthProvider = ({ children }) => {
         
         console.log('Current User', user);
         if (user) {
-            const userEmail = user?.email || user.email;
-            const loggedUser = { email: userEmail };
-            axios.post('https://harvest-hub-server-nine.vercel.app/jwt', loggedUser, {
-                withCredentials: true
-            })
+            // const userEmail = user?.email || user.email;
+            // const loggedUser = { email: userEmail };
+            const userInfo = { email: currentUser.email};
+            axiosPublic.post('/jwt', userInfo) 
             .then(res => {
-                console.log('token response', res.data);
-                setLoading(false); 
+                if(res.data.token){
+                    localStorage.setItem('access-token', res.data.token);
+                }
+                // console.log('token response', res.data);
+                // setLoading(false); 
             })
-            .catch(err => {
-                console.error('Token creation error:', err);
-                setLoading(false); 
-            });
-        } else {
-            axios.post('https://harvest-hub-server-nine.vercel.app/logout', loggedUser, {
+            
+            // .catch(err => {
+            //     console.error('Token creation error:', err);
+            //     setLoading(false); 
+            // });
+        } 
+        else {
+            localStorage.removeItem('access-token');
+            axios.post('http://localhost:5000/logout', loggedUser, {
                 withCredentials: true
             })
             .then(res => {

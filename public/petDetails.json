@@ -1,42 +1,42 @@
-[
-    {
-        "_id": "1",
-        "name": "Buddy",
-        "image": "https://i.ibb.co/P468Ghq/dog.jpg",
-        "age": "2 years",
-        "location": "New York, NY",
-        "description": "Friendly and playful dog."
-    },
-    {
-        "_id": "2",
-        "name": "Mittens",
-        "image": "https://i.ibb.co/94C3b1B/cats.jpg",
-        "age": "3 years",
-        "location": "Los Angeles, CA",
-        "description": "Calm and affectionate cat."
-    },
-    {
-        "_id": "3",
-        "name": "Tiger",
-        "image": "https://i.ibb.co/WvqwpWD/tiger.jpg",
-        "age": "3 years",
-        "location": "Los Angeles, CA",
-        "description": "Calm and affectionate cat."
-    },
-    {
-        "_id": "4",
-        "name": "Birds",
-        "image": "https://i.ibb.co/VCdZ9qp/birds.webp",
-        "age": "3 years",
-        "location": "Los Angeles, CA",
-        "description": "Calm and affectionate cat."
-    },
-    {
-        "_id": "5",
-        "name": "Rabbits",
-        "image": "https://i.ibb.co/YhDTCh7/rabbits.jpg",
-        "age": "3 years",
-        "location": "Los Angeles, CA",
-        "description": "Calm and affectionate cat."
-    }
-]
+// [
+//     {
+//         "_id": "1",
+//         "name": "Buddy",
+//         "image": "https://i.ibb.co/P468Ghq/dog.jpg",
+//         "age": "2 years",
+//         "location": "New York, NY",
+//         "description": "Friendly and playful dog."
+//     },
+//     {
+//         "_id": "2",
+//         "name": "Mittens",
+//         "image": "https://i.ibb.co/94C3b1B/cats.jpg",
+//         "age": "3 years",
+//         "location": "Los Angeles, CA",
+//         "description": "Calm and affectionate cat."
+//     },
+//     {
+//         "_id": "3",
+//         "name": "Tiger",
+//         "image": "https://i.ibb.co/WvqwpWD/tiger.jpg",
+//         "age": "3 years",
+//         "location": "Los Angeles, CA",
+//         "description": "Calm and affectionate cat."
+//     },
+//     {
+//         "_id": "4",
+//         "name": "Birds",
+//         "image": "https://i.ibb.co/VCdZ9qp/birds.webp",
+//         "age": "3 years",
+//         "location": "Los Angeles, CA",
+//         "description": "Calm and affectionate cat."
+//     },
+//     {
+//         "_id": "5",
+//         "name": "Rabbits",
+//         "image": "https://i.ibb.co/YhDTCh7/rabbits.jpg",
+//         "age": "3 years",
+//         "location": "Los Angeles, CA",
+//         "description": "Calm and affectionate cat."
+//     }
+// ]

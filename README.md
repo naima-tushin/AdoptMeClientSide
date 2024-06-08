@@ -2,7 +2,7 @@ Name of Website: Adopt Me (Assignment_ID: assignment12_category_0009)
 
 Vercel Live Site URL: 
 
-Firebase Hosting URL: 
+Firebase Hosting URL: https://adopt-me-a12.web.app
 
 
 Key Features and Characteristics: 

@@ -13,6 +13,11 @@ import {
     createBrowserRouter,
   } from "react-router-dom";
 import AddPet from "../Pages/Dashboard/AddPet/AddPet";
+import AdoptionRequest from "@/Pages/Dashboard/AdoptionRequest/AdoptionRequest";
+import MyAddedPets from "@/Pages/Dashboard/MyAddedPets/MyAddedPets";
+import CreateDonationCampaign from "@/Pages/Dashboard/CreateDonationCampaign/CreateDonationCampaign";
+import MyDonationCampaigns from "@/Pages/Dashboard/MyDonationCampaigns/MyDonationCampaigns";
+import MyDonations from "@/Pages/Dashboard/MyDonations/MyDonations";
 
   export const router = createBrowserRouter([
     {
@@ -58,6 +63,27 @@ import AddPet from "../Pages/Dashboard/AddPet/AddPet";
         {
           path: 'AddPet',
           element: <AddPet></AddPet>
+        },
+       
+        {
+          path: 'MyAddedPets',
+          element: <MyAddedPets></MyAddedPets>
+        },
+        {
+          path: 'AdoptionRequest',
+          element: <AdoptionRequest></AdoptionRequest>
+        },
+        {
+          path: 'CreateDonationCampaign',
+          element: <CreateDonationCampaign></CreateDonationCampaign>
+        },
+        {
+          path: 'MyDonationCampaigns',
+          element: <MyDonationCampaigns></MyDonationCampaigns>
+        }, 
+        {
+          path: 'MyDonations',
+          element: <MyDonations></MyDonations>
         }
       ]
     }
