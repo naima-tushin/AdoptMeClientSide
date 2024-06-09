@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Select from 'react-select';
 import axios from 'axios';
 import Swal from 'sweetalert2';
@@ -9,12 +9,15 @@ const petCategories = [
     { value: 'cat', label: 'Cat' },
     { value: 'bird', label: 'Bird' },
     { value: 'fish', label: 'Fish' },
+    { value: 'rabbit', label: 'Rabbit' },
     // add more categories as needed
 ];
   
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const AddPet = () => {
-
+    const now = new Date();
     const { user } = useAuth();
 
     const [form, setForm] = useState({
@@ -28,18 +31,13 @@ const AddPet = () => {
         ownerImage: user?.photoURL || "",
         ownerName: user?.displayName || "",
         ownerEmail: user?.email || "",
-        creationDate: '',
-        creationTime: '',
+        creationDate: `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}`,
+        creationTime: `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`,
         adopted: false,
     });
     const [uploadedImageUrl, setUploadedImageUrl] = useState('');
 
-    const getCurrentDateTime = () => {
-        const now = new Date();
-        const creationDate = `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}`;
-        const creationTime = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`;
-        return { creationDate, creationTime };
-    };
+   
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -62,7 +60,7 @@ const AddPet = () => {
         formData.append('image', file);
 
         try {
-            const response = await axios.post(`https://api.imgbb.com/1/upload?key=af0bb17dfe6a251ff3d14c09e0d68baa`, formData);
+            const response = await axios.post(image_hosting_api, formData);
             const uploadedUrl = response.data.data.url;
             setForm({
                 ...form,
@@ -85,12 +83,6 @@ const AddPet = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const { creationDate: creationDate, creationTime: creationTime } = getCurrentDateTime();
-        setForm({
-            ...form,
-            creationDate: creationDate,
-            currentTime: creationTime
-        });
         console.log(form);
         console.log(form.petImage);
         if (form.petImage !== '' && form.petName !== '' && form.petAge !== '' && form.petCategory !== '' && form.shortDescription !== '' && form.longDescription !== '') {
@@ -149,7 +141,7 @@ const AddPet = () => {
     };
 
     return (
-        <div className="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-lg" style={{ paddingTop: '80px' }}>
+        <div className="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-lg">
             <h2 className="text-4xl font-bold mb-6 text-center">Add a Pet</h2>
             <form onSubmit={handleSubmit}>
                 <div className="mb-4">

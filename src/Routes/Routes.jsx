@@ -18,6 +18,7 @@ import MyAddedPets from "@/Pages/Dashboard/MyAddedPets/MyAddedPets";
 import CreateDonationCampaign from "@/Pages/Dashboard/CreateDonationCampaign/CreateDonationCampaign";
 import MyDonationCampaigns from "@/Pages/Dashboard/MyDonationCampaigns/MyDonationCampaigns";
 import MyDonations from "@/Pages/Dashboard/MyDonations/MyDonations";
+import Payment from "@/Pages/Payment/Payment";
 
   export const router = createBrowserRouter([
     {
@@ -47,6 +48,10 @@ import MyDonations from "@/Pages/Dashboard/MyDonations/MyDonations";
           </ProtectedRoute>
       }, 
       {
+        path: 'Payment',
+        element: <Payment></Payment>
+      },
+      {
         path: '/Login',
         element: <Login></Login>
       }, 
@@ -68,6 +73,7 @@ import MyDonations from "@/Pages/Dashboard/MyDonations/MyDonations";
         {
           path: 'MyAddedPets',
           element: <MyAddedPets></MyAddedPets>
+          
         },
         {
           path: 'AdoptionRequest',

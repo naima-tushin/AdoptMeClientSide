@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Modal from 'react-modal';
 
@@ -90,6 +90,9 @@ const DonationDetails = () => {
                                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
                             />
                     </div>
+                    <Link to="/Payment">
+                    <button className='my-4 px-10 py-2 rounded-lg text-xl font-bold border-orange-400 border-2'>Pay</button>
+                    </Link>
                     <form onSubmit={handleDonationSubmit}>
                          <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 focus:outline-none">
                             Submit
