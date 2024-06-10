@@ -24,7 +24,6 @@ const PetDetails = () => {
                 return response.json();
             })
             .then(data => {
-                // Find pet by id from the fetched data
                 const pet = data.find(pet => pet._id === id);
                 if (!pet) {
                     throw new Error(`Pet with ID ${id} not found`);
@@ -54,38 +53,34 @@ const PetDetails = () => {
             isAcceptedRequest: 0,
         };
 
-        // Call the API to add adoption request
         addAdoptionRequest(adoptionData);
-
-        // For now, just log the adoption data
         console.log('Adoption request:', adoptionData);
         closeModal();
     };
 
-    // Function to add adoption request
     const addAdoptionRequest = (adoptionData) => {
-       if(phone != '' && address != ''){
-        fetch('http://localhost:5000/addAdoptionRequest', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(adoptionData)
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Network response was not ok: ${response.statusText}`);
-            }
-            Swal.fire('Success', 'Request added successfully!', 'success');
-            phone= '';
-            address= '';
-        })
-        .catch(error => {
-            console.error('Add Adoption Request error:', error);
-        });
-       } else{
-        Swal.fire('Error', 'phone number and location should be added', 'error');
-       }
+        if (phone !== '' && address !== '') {
+            fetch('http://localhost:5000/addAdoptionRequest', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(adoptionData)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Network response was not ok: ${response.statusText}`);
+                }
+                Swal.fire('Success', 'Request added successfully!', 'success');
+                setPhone(''); // Correctly update state using setter
+                setAddress(''); // Correctly update state using setter
+            })
+            .catch(error => {
+                console.error('Add Adoption Request error:', error);
+            });
+        } else {
+            Swal.fire('Error', 'Phone number and location should be added', 'error');
+        }
     };
 
     if (!pet) return <div>Loading...</div>;
@@ -95,12 +90,9 @@ const PetDetails = () => {
             <Helmet>
                 <title>Adopt Me | Pet Details</title>
             </Helmet>
-            {/* Banner Section */}
             <div className="w-full h-[570px] mb-4">
                 <img src={pet.petImage} alt={pet.petName} className="w-full h-full object-cover rounded-md" />
             </div>
-
-            {/* Pet Details Section */}
             <h1 className="text-2xl font-semibold mb-2">{pet.petName}</h1>
             <p className="text-sm text-gray-500 mb-2">Age: {pet.petAge}</p>
             <p className="text-sm text-gray-500 mb-2">Location: {pet.petLocation}</p>
@@ -138,7 +130,7 @@ const PetDetails = () => {
                                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
                             />
                         </div>
-                        <button type="submit" onClick={handleSubmit} className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 focus:outline-none">
+                        <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 focus:outline-none">
                             Submit
                         </button>
                     </form>
