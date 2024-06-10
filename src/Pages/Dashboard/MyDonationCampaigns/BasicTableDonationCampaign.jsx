@@ -15,7 +15,7 @@ export default function BasicTableDonationCampaign() {
     useEffect(() => {
         const fetchDonationCampaign = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/myDonationCampaign/${user?.email}`);
+                const response = await fetch(`https://pet-adoption-server-side-two.vercel.app/myDonationCampaign/${user?.email}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch pets');
                 }
@@ -32,7 +32,7 @@ export default function BasicTableDonationCampaign() {
 
     const fetchDonators = async (campaignId) => {
         try {
-            const response = await axios.get(`http://localhost:5000/donator/${campaignId}`);
+            const response = await axios.get(`https://pet-adoption-server-side-two.vercel.app/donator/${campaignId}`);
             setDonators(response.data);
         } catch (error) {
             console.error('Fetch donators error:', error);
@@ -106,7 +106,7 @@ export default function BasicTableDonationCampaign() {
 
     const pauseDonationCampaign = async (id) => {
         try {
-            const response = await fetch(`http://localhost:5000/updateDonationCampaignStatus/${id}`, {
+            const response = await fetch(`https://pet-adoption-server-side-two.vercel.app/updateDonationCampaignStatus/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

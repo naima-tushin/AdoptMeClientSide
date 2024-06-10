@@ -16,7 +16,7 @@ const PetDetails = () => {
     const [address, setAddress] = useState('');
 
     useEffect(() => {
-        fetch('http://localhost:5000/PetListingDetails')
+        fetch('https://pet-adoption-server-side-two.vercel.app/PetListingDetails')
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`Network response was not ok: ${response.statusText}`);
@@ -60,7 +60,7 @@ const PetDetails = () => {
 
     const addAdoptionRequest = (adoptionData) => {
         if (phone !== '' && address !== '') {
-            fetch('http://localhost:5000/addAdoptionRequest', {
+            fetch('https://pet-adoption-server-side-two.vercel.app/addAdoptionRequest', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

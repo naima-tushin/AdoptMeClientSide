@@ -9,7 +9,7 @@ export default function BasicTableUser() {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/user`);
+                const response = await fetch(`https://pet-adoption-server-side-two.vercel.app/user`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch donations');
                 }
@@ -30,7 +30,7 @@ export default function BasicTableUser() {
 
             const form = { role: 'admin' };
 
-            const response = await axios.put(`http://localhost:5000/makeAdmin/${id}`, form);
+            const response = await axios.put(`https://pet-adoption-server-side-two.vercel.app/makeAdmin/${id}`, form);
             if (response.status === 200) {
                 Swal.fire('Success', `${userName} made admin successfully`, 'success');
                 window.location.reload();

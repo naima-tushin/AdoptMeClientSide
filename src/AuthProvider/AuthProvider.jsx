@@ -71,13 +71,13 @@ const AuthProvider = ({ children }) => {
                 const userEmail = user.email;
                 const loggedUser = { email: userEmail };
 
-                axios.post('http://localhost:5000/jwt', loggedUser, {
+                axios.post('https://pet-adoption-server-side-two.vercel.app/jwt', loggedUser, {
                     withCredentials: true
                 })
                 .then(res => {
                     console.log('token response', res.data);
                     // Fetch the user's role
-                    axios.get(`http://localhost:5000/userDetails/${userEmail}`)
+                    axios.get(`https://pet-adoption-server-side-two.vercel.app/userDetails/${userEmail}`)
                         .then(roleRes => {
                             console.log('Role API response:', roleRes.data); 
                             if (roleRes.data && roleRes.data.length > 0) {
@@ -98,7 +98,7 @@ const AuthProvider = ({ children }) => {
                     setLoading(false);
                 });
             } else {
-                axios.post('http://localhost:5000/logout', {}, {
+                axios.post('https://pet-adoption-server-side-two.vercel.app/logout', {}, {
                     withCredentials: true
                 })
                 .then(res => {

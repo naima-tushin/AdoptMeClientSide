@@ -11,7 +11,7 @@ export default function BasicTableAdoptionRequest() {
     useEffect(() => {
         const fetchMyAdoptionRequest = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/myAdoptionRequest/${user?.email}`);
+                const response = await fetch(`https://pet-adoption-server-side-two.vercel.app/myAdoptionRequest/${user?.email}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch donations');
                 }
@@ -30,7 +30,7 @@ export default function BasicTableAdoptionRequest() {
         try {
             const form = { isAcceptedRequest: status };
            
-                const response = await axios.put(`http://localhost:5000/acceptRejectAdoptionRequest/${id}`, form);
+                const response = await axios.put(`https://pet-adoption-server-side-two.vercel.app/acceptRejectAdoptionRequest/${id}`, form);
                 if (response.status === 200) {
                     Swal.fire('Success', 'Donated amount updated successfully!', 'success');
                 } else {

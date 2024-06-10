@@ -19,7 +19,7 @@ const CheckoutForm = ({ donationAmount, id, donatedAmount }) => {
     const handleDonatedAmount = async () => {
         const form = { donatedAmount: parseInt(donationAmount) + parseInt(donatedAmount) };
         try {
-            const response = await axios.put(`http://localhost:5000/addDonatedAmount/${id}`, form);
+            const response = await axios.put(`https://pet-adoption-server-side-two.vercel.app/addDonatedAmount/${id}`, form);
             if (response.status === 200) {
                 Swal.fire('Success', 'Donated amount updated successfully!', 'success');
             } else {
@@ -32,7 +32,7 @@ const CheckoutForm = ({ donationAmount, id, donatedAmount }) => {
     };
 
     useEffect(() => {
-        fetch('http://localhost:5000/DonationCampaignsDetails')
+        fetch('https://pet-adoption-server-side-two.vercel.app/DonationCampaignsDetails')
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`Network response was not ok: ${response.statusText}`);
@@ -55,7 +55,7 @@ const CheckoutForm = ({ donationAmount, id, donatedAmount }) => {
     const handleDonatedList = async () => {
         const form = { donatedAmount: donationAmount, donatorName: user?.displayName, donatorEmail: user?.email, donationCampaignId: id, petImage: donation.petImage, petName: donation.petName};
         try {
-            const response = await axios.post(`http://localhost:5000/addDonatedList`, form);
+            const response = await axios.post(`https://pet-adoption-server-side-two.vercel.app/addDonatedList`, form);
             if (response.status === 200) {
                console.log('added to donation list');
             } else {

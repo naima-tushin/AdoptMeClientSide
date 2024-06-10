@@ -11,7 +11,7 @@ export default function BasicTableMyDonation() {
     useEffect(() => {
         const fetchMyDonations = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/myDonation/${user?.email}`);
+                const response = await fetch(`https://pet-adoption-server-side-two.vercel.app/myDonation/${user?.email}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch donations');
                 }
@@ -28,7 +28,7 @@ export default function BasicTableMyDonation() {
 
     const askForRefund = async (id, donationCampaignId, donatedAmount) => {
         try {
-            const campaignResponse = await axios.get(`http://localhost:5000/donationCampaignDetailsById/${donationCampaignId}`);
+            const campaignResponse = await axios.get(`https://pet-adoption-server-side-two.vercel.app/donationCampaignDetailsById/${donationCampaignId}`);
             if (campaignResponse.status !== 200) {
                 throw new Error('Failed to fetch campaign details');
             }
@@ -36,14 +36,14 @@ export default function BasicTableMyDonation() {
 
             const form = { donatedAmount: parseInt(campaignResponse.data.donatedAmount) - parseInt(donatedAmount) };
            
-                const response = await axios.put(`http://localhost:5000/addDonatedAmount/${donationCampaignId}`, form);
+                const response = await axios.put(`https://pet-adoption-server-side-two.vercel.app/addDonatedAmount/${donationCampaignId}`, form);
                 if (response.status === 200) {
                     Swal.fire('Success', 'Donated amount updated successfully!', 'success');
                 } else {
                     Swal.fire('Error', 'Failed to update donated amount', 'error');
                 }
 
-            const responseDelete = await axios.delete(`http://localhost:5000/donationDelete/${id}`);
+            const responseDelete = await axios.delete(`https://pet-adoption-server-side-two.vercel.app/donationDelete/${id}`);
             if (responseDelete.status === 200) {
                 Swal.fire('Success', 'Refund requested successfully', 'success');
                 setMyDonation(prevDonations => prevDonations.filter(donation => donation._id !== id));

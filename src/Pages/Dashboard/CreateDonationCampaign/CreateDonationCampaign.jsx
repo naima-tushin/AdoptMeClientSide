@@ -83,7 +83,7 @@ const CreateDonationCampaign = () => {
             form.longDescription !== '' &&
             form.lastDateOfDonation !== ''
         ) {
-            fetch('http://localhost:5000/addDonationCampaign', {
+            fetch('https://pet-adoption-server-side-two.vercel.app/addDonationCampaign', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

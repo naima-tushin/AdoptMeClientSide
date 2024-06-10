@@ -70,7 +70,7 @@ const EditDonationCampaign = () => {
     const handleUpdate = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.put(`http://localhost:5000/updateDonationCampaign/${donationCampaign._id}`, form);
+            const response = await axios.put(`https://pet-adoption-server-side-two.vercel.app/updateDonationCampaign/${donationCampaign._id}`, form);
             if (response.status === 200) {
                 Swal.fire('Success', 'Pet updated successfully!', 'success');
             } else {

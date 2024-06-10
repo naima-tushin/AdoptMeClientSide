@@ -11,7 +11,7 @@ export default function BasicTableAllDonations() {
     useEffect(() => {
         const fetchDonationCampaign = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/DonationCampaignsDetails`);
+                const response = await fetch(`https://pet-adoption-server-side-two.vercel.app/DonationCampaignsDetails`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch pets');
                 }
@@ -87,7 +87,7 @@ export default function BasicTableAllDonations() {
 
     const pauseDonationCampaign = async (id) => {
         try {
-            const response = await fetch(`http://localhost:5000/updateDonationCampaignStatus/${id}`, {
+            const response = await fetch(`https://pet-adoption-server-side-two.vercel.app/updateDonationCampaignStatus/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -116,7 +116,7 @@ export default function BasicTableAllDonations() {
         try {
            
 
-            const response = await fetch(`http://localhost:5000/donationCampaignDelete/${id}`, {
+            const response = await fetch(`https://pet-adoption-server-side-two.vercel.app/donationCampaignDelete/${id}`, {
                 method: 'DELETE',
             });
 

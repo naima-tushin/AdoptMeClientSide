@@ -87,7 +87,7 @@ import AllDonations from "@/Pages/Dashboard/AllDonations/AllDonations";
         {
           path: 'UpdatePet/:id', 
           element: <UpdatePet></UpdatePet>,
-          loader: ({ params }) => fetch(`http://localhost:5000/petDetails/${params.id}`),
+          loader: ({ params }) => fetch(`https://pet-adoption-server-side-two.vercel.app/petDetails/${params.id}`),
         }, 
         {
           path: 'BasicTable', 
@@ -96,7 +96,7 @@ import AllDonations from "@/Pages/Dashboard/AllDonations/AllDonations";
         {
           path: 'EditDonationCampaign/:id', 
           element: <EditDonationCampaign></EditDonationCampaign>,
-          loader: ({ params }) => fetch(`http://localhost:5000/donationCampaignDetailsById/${params.id}`),
+          loader: ({ params }) => fetch(`https://pet-adoption-server-side-two.vercel.app/donationCampaignDetailsById/${params.id}`),
         }, 
         
         {

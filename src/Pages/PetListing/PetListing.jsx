@@ -12,7 +12,7 @@ const PetListing = () => {
 
     useEffect(() => {
         setIsLoading(true);
-        fetch('http://localhost:5000/PetListingDetails')
+        fetch('https://pet-adoption-server-side-two.vercel.app/PetListingDetails')
             .then(response => response.json())
             .then(data => {
                 setPets(data);

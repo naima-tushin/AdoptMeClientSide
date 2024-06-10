@@ -15,7 +15,7 @@ export default function BasicTableAllPets() {
     useEffect(() => {
         const fetchPets = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/PetListingDetails`);
+                const response = await fetch(`https://pet-adoption-server-side-two.vercel.app/PetListingDetails`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch pets');
                 }
@@ -109,7 +109,7 @@ export default function BasicTableAllPets() {
     // Function to mark a pet as adopted
     const markAsAdopted = async (id, status) => {
         try {
-            const response = await fetch(`http://localhost:5000/petUpdateAdoptedStatus/${id}`, {
+            const response = await fetch(`https://pet-adoption-server-side-two.vercel.app/petUpdateAdoptedStatus/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -142,7 +142,7 @@ export default function BasicTableAllPets() {
                 return;
             }
 
-            const response = await fetch(`http://localhost:5000/petDelete/${selectedPet._id}`, {
+            const response = await fetch(`https://pet-adoption-server-side-two.vercel.app/petDelete/${selectedPet._id}`, {
                 method: 'DELETE',
             });
 

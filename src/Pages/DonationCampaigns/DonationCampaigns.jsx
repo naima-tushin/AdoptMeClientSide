@@ -13,7 +13,7 @@ const DonationCampaigns = () => {
 
     const fetchData = () => {
         setIsLoading(true);
-        fetch('http://localhost:5000/DonationCampaignsDetails')
+        fetch('https://pet-adoption-server-side-two.vercel.app/DonationCampaignsDetails')
             .then(response => response.json())
             .then(data => {
                 // Sort campaigns by date in descending order

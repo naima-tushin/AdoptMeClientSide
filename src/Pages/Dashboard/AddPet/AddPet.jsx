@@ -87,7 +87,7 @@ const AddPet = () => {
         console.log(form.petImage);
         if (form.petImage !== '' && form.petName !== '' && form.petAge !== '' && form.petCategory !== '' && form.shortDescription !== '' && form.longDescription !== '') {
             console.log(form);
-            fetch('http://localhost:5000/addPet', {
+            fetch('https://pet-adoption-server-side-two.vercel.app/addPet', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
