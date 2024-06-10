@@ -19,6 +19,9 @@ import CreateDonationCampaign from "@/Pages/Dashboard/CreateDonationCampaign/Cre
 import MyDonationCampaigns from "@/Pages/Dashboard/MyDonationCampaigns/MyDonationCampaigns";
 import MyDonations from "@/Pages/Dashboard/MyDonations/MyDonations";
 import Payment from "@/Pages/Payment/Payment";
+import UpdatePet from "@/Pages/Dashboard/MyAddedPets/UpdatePet";
+import BasicTable from "@/Pages/Dashboard/MyAddedPets/BasicTable";
+import EditDonationCampaign from "@/Pages/Dashboard/MyDonationCampaigns/EditDonationCampaign";
 
   export const router = createBrowserRouter([
     {
@@ -48,7 +51,7 @@ import Payment from "@/Pages/Payment/Payment";
           </ProtectedRoute>
       }, 
       {
-        path: 'Payment',
+        path: '/Payment/:id/:donationAmount/:donatedAmount',
         element: <Payment></Payment>
       },
       {
@@ -75,6 +78,21 @@ import Payment from "@/Pages/Payment/Payment";
           element: <MyAddedPets></MyAddedPets>
           
         },
+        {
+          path: 'UpdatePet/:id', 
+          element: <UpdatePet></UpdatePet>,
+          loader: ({ params }) => fetch(`http://localhost:5000/petDetails/${params.id}`),
+        }, 
+        {
+          path: 'BasicTable', 
+          element: <BasicTable></BasicTable>
+        }, 
+        {
+          path: 'EditDonationCampaign/:id', 
+          element: <EditDonationCampaign></EditDonationCampaign>,
+          loader: ({ params }) => fetch(`http://localhost:5000/donationCampaignDetailsById/${params.id}`),
+        }, 
+        
         {
           path: 'AdoptionRequest',
           element: <AdoptionRequest></AdoptionRequest>

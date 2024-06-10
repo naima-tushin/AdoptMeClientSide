@@ -1,11 +1,13 @@
 import React from 'react';
+import BasicTableAdoptionRequest from './BasicTableAdoptionRequest';
 
 const AdoptionRequest = () => {
     return (
         <div>
-            <h2 className="text-6xl">Adoption Request</h2>
-            
+        <div style={{ paddingTop: '80px' }}>
+            <BasicTableAdoptionRequest></BasicTableAdoptionRequest>
         </div>
+    </div>
     );
 };
 

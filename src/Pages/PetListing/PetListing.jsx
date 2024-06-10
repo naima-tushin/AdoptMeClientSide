@@ -11,24 +11,15 @@ const PetListing = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        // Fetch the pet data from the JSON file
+        setIsLoading(true);
         fetch('http://localhost:5000/PetListingDetails')
             .then(response => response.json())
-            .then(data => setPets(data));
-    }, []);
-
-    useEffect(() => {
-        // Fetch pets data from API or local storage
-        // For now, let's assume petsData is fetched from somewhere
-        const petsData = [
-            { _id: "1", name: 'Buddy', age: '2 years', location: 'New York, NY', category: 'Dog', image: 'https://i.ibb.co/P468Ghq/dog.jpg' },
-            { _id: "2", name: 'Mittens', age: '3 years', location: 'Los Angeles, CA', category: 'Cat', image: 'https://i.ibb.co/94C3b1B/cats.jpg' },
-            { _id: "3", name: 'Tiger', age: '3 years', location: 'Los Angeles, CA', category: 'Cat', image: 'https://i.ibb.co/WvqwpWD/tiger.jpg' },
-            { _id: "4", name: 'Birds', age: '3 years', location: 'Los Angeles, CA', category: 'Cat', image: 'https://i.ibb.co/VCdZ9qp/birds.webp' },
-            { _id: "5", name: 'Rabbits', age: '3 years', location: 'Los Angeles, CA', category: 'Cat', image: 'https://i.ibb.co/YhDTCh7/rabbits.jpg' },
-        ];
-        setPets(petsData);
-        setFilteredPets(petsData);
+            .then(data => {
+                setPets(data);
+                setFilteredPets(data);
+                setIsLoading(false);
+            })
+            .catch(() => setIsLoading(false));
     }, []);
 
     const handleSearch = (e) => {
@@ -44,12 +35,18 @@ const PetListing = () => {
     };
 
     const filterPets = (query, category) => {
-        const filtered = pets.filter(pet =>
-            pet.name.toLowerCase().includes(query) &&
-            (category === 'All' || pet.category === category)
-        );
+        const filtered = pets.filter(pet => {
+            const petName = pet.petName ? pet.petName.toLowerCase() : '';
+            const isNameMatch = petName.includes(query);
+            const isCategoryMatch = category === 'All' || pet.petCategory === category;
+            return isNameMatch && isCategoryMatch;
+        });
         setFilteredPets(filtered);
     };
+
+    useEffect(() => {
+        filterPets(searchQuery, selectedCategory);
+    }, [pets, searchQuery, selectedCategory]);
 
     return (
         <div className="App" style={{ paddingTop: '80px' }}>
@@ -86,17 +83,23 @@ const PetListing = () => {
                         className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-400"
                     >
                         <option value="All">All</option>
-                        <option value="Dog">Dog</option>
-                        <option value="Cat">Cat</option>
+                        <option value="dog">Dog</option>
+                        <option value="cat">Cat</option>
+                        <option value="rabbit">Rabbit</option>
+                        <option value="bird">Bird</option>
+                        <option value="tiger">Tiger</option>
                         {/* Add more categories if needed */}
                     </select>
                 </div>
-                <div className="grid grid-cols-3 gap-4">
-                    {filteredPets.map(pet => (
-                        <PetListingCard key={pet._id} pet={pet} />
-                    ))}
-                </div>
-                {isLoading && <p>Loading...</p>}
+                {isLoading ? (
+                    <p>Loading...</p>
+                ) : (
+                    <div className="grid grid-cols-3 gap-4">
+                        {filteredPets.map(pet => (
+                            <PetListingCard key={pet._id} pet={pet} />
+                        ))}
+                    </div>
+                )}
             </div>
         </div>
     );
