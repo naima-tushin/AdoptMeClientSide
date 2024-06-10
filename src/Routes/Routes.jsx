@@ -7,8 +7,6 @@ import Login from "@/Pages/Login/Login";
 import PetDetails from "@/Pages/PetDetails/PetDetails";
 import PetListing from "@/Pages/PetListing/PetListing";
 import ProtectedRoute from "@/Pages/ProtectedRoute/ProtectedRoute";
-// import Register from "@/Pages/Register/Register";
-
 import {
     createBrowserRouter,
   } from "react-router-dom";
@@ -22,6 +20,10 @@ import Payment from "@/Pages/Payment/Payment";
 import UpdatePet from "@/Pages/Dashboard/MyAddedPets/UpdatePet";
 import BasicTable from "@/Pages/Dashboard/MyAddedPets/BasicTable";
 import EditDonationCampaign from "@/Pages/Dashboard/MyDonationCampaigns/EditDonationCampaign";
+import UserHome from "@/Pages/Dashboard/UserHome/UserHome";
+import Users from "@/Pages/Dashboard/Users/Users";
+import AllPets from "@/Pages/Dashboard/AllPets/AllPets";
+import AllDonations from "@/Pages/Dashboard/AllDonations/AllDonations";
 
   export const router = createBrowserRouter([
     {
@@ -69,6 +71,10 @@ import EditDonationCampaign from "@/Pages/Dashboard/MyDonationCampaigns/EditDona
       element: <ProtectedRoute><Dashboard></Dashboard></ProtectedRoute>,
       children: [
         {
+          path: 'UserHome',
+          element: <UserHome></UserHome>
+        },
+        {
           path: 'AddPet',
           element: <AddPet></AddPet>
         },
@@ -108,7 +114,21 @@ import EditDonationCampaign from "@/Pages/Dashboard/MyDonationCampaigns/EditDona
         {
           path: 'MyDonations',
           element: <MyDonations></MyDonations>
-        }
+        },
+
+        //Admin Dashboard
+        {
+          path: 'Users',
+          element: <Users></Users>
+        },
+        {
+          path: 'AllPets',
+          element: <AllPets></AllPets>
+        },
+        {
+          path: 'AllDonations',
+          element: <AllDonations></AllDonations>
+        },
       ]
     }
   ]);

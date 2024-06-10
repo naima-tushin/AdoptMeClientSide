@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet-async';
 import Swal from 'sweetalert2';
 import useAuth from '@/Hooks/useAuth';
 
-Modal.setAppElement('#root'); // Ensure to set the root element
+Modal.setAppElement('#root'); 
 
 const PetDetails = () => {
     const { user } = useAuth();
@@ -16,7 +16,6 @@ const PetDetails = () => {
     const [address, setAddress] = useState('');
 
     useEffect(() => {
-        // Fetch pet details from the JSON file
         fetch('http://localhost:5000/PetListingDetails')
             .then(response => {
                 if (!response.ok) {
